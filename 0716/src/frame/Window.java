@@ -6,8 +6,8 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Panel;
 
-public class Window extends Frame {
-	// ìƒì„±ì
+public class Window<TextThread> extends Frame {
+	// »ı¼ºÀÚ
 	public Window() {
 		// Dialog dialog = new Dialog(this, "dialogTitle");
 		// dialog.setTitle("dialog.setTitle");
@@ -19,19 +19,59 @@ public class Window extends Frame {
 		setBackground(Color.BLUE);
 		Panel panel = new Panel();
 		Button button = new Button("button");
-		// add(button);
-		
+
+		// ¹öÆ°ÀÇ ¹è°æ»öÀ» º¯°æÇÏ´Â ½º·¹µå
+		// ColorThread th =new ColorThread(button);
+		Thread th = new Thread() {
+
+			public void run() {
+				Color[] color = { Color.CYAN, Color.BLUE,Color.PINK, Color.darkGray };
+
+				int idx = 0;
+				while (true) {
+					try {
+						Thread.sleep(1000);
+						idx = idx + 1;
+						button.setBackground(color[idx % color.length]);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		th.start();
 		panel.add(button);
-		
+
 		Button button2 = new Button("button2");
+		// ¹öÆ°ÀÇ ÅØ½ºÆ®¸¦ º¯°æÇÏ´Â ½º·¹µå
+		Thread th2 =new Thread() {
+			public void run() {
+				String[] ar = {" Java ", "Oracle", "FrontEnd", "BankEnd", "Android", "iOS"};
+				int idx = 0;
+				while (true) {
+					try {
+						Thread.sleep(1000);
+						idx += 1;
+						button2.setLabel(ar[idx % ar.length]);
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}
+		};
+
+		th2.start();
+		// Æä³ÎÀ» ÇÁ·¹ÀÓ¿¡ Ãß°¡
 		panel.add(button2);
-		
-		//íŒ¨ë„ì— í”„ë ˆì„ì„ ì¶”ê°€
+
 		add(panel);
-		
+
 		setVisible(true);
-	
-		
+
 	}
 }
-//í•œê¸€ ì¸ì½”ë”©í•˜ë ¤ë©´ MS949ë¡œ ë°”ê¿”ì„œ 
+// ÇÑ±Û ÀÎÄÚµùÇÏ·Á¸é MS949·Î ¹Ù²ã¼­
