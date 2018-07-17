@@ -2,7 +2,7 @@ package frame;
 
 import java.awt.Button;
 import java.awt.Color;
-import java.awt.Dialog;
+//import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Panel;
 

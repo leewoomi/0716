@@ -67,6 +67,9 @@ public class ComponentTest extends Frame {
 		//앞에서 부터 지우면 계산해야 해서 실수를 할 수 있음.
 		list.remove(4);
 		list.remove(0);
+		
+		 
+		
 		add(p);
 		setVisible(true);
 	}
